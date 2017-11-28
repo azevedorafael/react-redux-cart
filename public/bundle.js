@@ -70,33 +70,67 @@
 "use strict";
 
 
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
 var _redux = __webpack_require__(8);
 
-// Reducers
+function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
+
+// Reducers Must not Mutate the State - use PURE Funcitons
 var reducer = function reducer() {
-    var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [{}];
+    var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : { products: [] };
     var action = arguments[1];
 
     switch (action.type) {
         case "POST_PRODUCT":
-            return state = action.payload;
+            // let products = state.products.concat(action.payload);
+            //     return {products};
+            //The tow lines above can be changed by the spread operator below
+            return { products: [].concat(_toConsumableArray(state.products), _toConsumableArray(action.payload)) };
+            break;
+
+        case "DELETE_PRODUCT":
+            // Create temp copy of the array of products
+            var currentProductToDelete = [].concat(_toConsumableArray(state.products));
+            // Find the product by the index
+            var indexToDelete = currentProductToDelete.findIndex(function (product) {
+                return product.id === action.payload.id;
+            });
+            // Delete the product from the array
+            return {
+                products: [].concat(_toConsumableArray(currentProductToDelete.slice(0, indexToDelete)), _toConsumableArray(currentProductToDelete.slice(indexToDelete + 1)))
+            };
+            break;
+
+        case "UPDATE_PRODUCT":
+            // Create temp copy of the array of products
+            var currentProductToUpdate = [].concat(_toConsumableArray(state.products));
+            // Find the product by the index
+            var indexToUpdate = currentProductToUpdate.findIndex(function (product) {
+                return product.id === action.payload.id;
+            });
+            // Create a new product object
+            var newProductToUpdate = _extends({}, currentProductToUpdate[indexToUpdate], {
+                title: action.payload.title
+                //remove the product from the index and replace
+            });return {
+                products: [].concat(_toConsumableArray(currentProductToUpdate.slice(0, indexToUpdate)), [newProductToUpdate], _toConsumableArray(currentProductToUpdate.slice(indexToUpdate + 1)))
+            };
             break;
     }
     return state;
 };
 
-//Store
+// Store
 var store = (0, _redux.createStore)(reducer);
 
 store.subscribe(function () {
     console.log('current state is: ', store.getState());
-    console.log('ID: ' + store.getState()[1].id);
-    console.log('Title: ' + store.getState()[1].title);
-    console.log('Description: ' + store.getState()[1].description);
-    console.log('Price: ' + store.getState()[1].price);
 });
 
 // Actions
+
+// Post - ADD
 store.dispatch({
     type: "POST_PRODUCT",
     payload: [{
@@ -110,6 +144,36 @@ store.dispatch({
         description: 'used',
         price: 53.33
     }]
+});
+
+store.dispatch({
+    type: "POST_PRODUCT",
+    payload: [{
+        id: 3,
+        title: 'Camisa',
+        description: 'very fresh new one',
+        price: 33.33
+    }, {
+        id: 4,
+        title: 'Boné',
+        description: 'used',
+        price: 53.33
+    }]
+});
+
+// Update
+store.dispatch({
+    type: "UPDATE_PRODUCT",
+    payload: {
+        id: 2,
+        title: 'New Title MTF'
+    }
+});
+
+// Delete
+store.dispatch({
+    type: "DELETE_PRODUCT",
+    payload: { id: 1 }
 });
 
 /***/ }),
