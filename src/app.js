@@ -1,4 +1,5 @@
-import { createStore } from 'redux';
+import { applyMiddleware, createStore } from 'redux';
+import logger from 'redux-logger';
 
 import reducers from './reducers/index';
 
@@ -6,11 +7,14 @@ import { addCart } from './actions/cartActions';
 import { postProducts, deleteProducts, updateProducts } from './actions/producstActions';
 
 // Store
-const store = createStore(reducers);
+const middleware = applyMiddleware(logger);
+const store = createStore(reducers, middleware);
 
-store.subscribe(function () {
-    console.log('current state is: ', store.getState());
-});
+
+// store.subscribe(function () {
+//     console.log('current state is: ', store.getState());
+// });
+// Changed the code above by the redux-logger
 
 // Actions
 
