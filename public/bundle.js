@@ -70,59 +70,16 @@
 "use strict";
 
 
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
 var _redux = __webpack_require__(8);
 
-function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
+var _index = __webpack_require__(24);
 
-// Reducers Must not Mutate the State - use PURE Funcitons
-var reducer = function reducer() {
-    var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : { products: [] };
-    var action = arguments[1];
+var _index2 = _interopRequireDefault(_index);
 
-    switch (action.type) {
-        case "POST_PRODUCT":
-            // let products = state.products.concat(action.payload);
-            //     return {products};
-            //The tow lines above can be changed by the spread operator below
-            return { products: [].concat(_toConsumableArray(state.products), _toConsumableArray(action.payload)) };
-            break;
-
-        case "DELETE_PRODUCT":
-            // Create temp copy of the array of products
-            var currentProductToDelete = [].concat(_toConsumableArray(state.products));
-            // Find the product by the index
-            var indexToDelete = currentProductToDelete.findIndex(function (product) {
-                return product.id === action.payload.id;
-            });
-            // Delete the product from the array
-            return {
-                products: [].concat(_toConsumableArray(currentProductToDelete.slice(0, indexToDelete)), _toConsumableArray(currentProductToDelete.slice(indexToDelete + 1)))
-            };
-            break;
-
-        case "UPDATE_PRODUCT":
-            // Create temp copy of the array of products
-            var currentProductToUpdate = [].concat(_toConsumableArray(state.products));
-            // Find the product by the index
-            var indexToUpdate = currentProductToUpdate.findIndex(function (product) {
-                return product.id === action.payload.id;
-            });
-            // Create a new product object
-            var newProductToUpdate = _extends({}, currentProductToUpdate[indexToUpdate], {
-                title: action.payload.title
-                //remove the product from the index and replace
-            });return {
-                products: [].concat(_toConsumableArray(currentProductToUpdate.slice(0, indexToUpdate)), [newProductToUpdate], _toConsumableArray(currentProductToUpdate.slice(indexToUpdate + 1)))
-            };
-            break;
-    }
-    return state;
-};
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 // Store
-var store = (0, _redux.createStore)(reducer);
+var store = (0, _redux.createStore)(_index2.default);
 
 store.subscribe(function () {
     console.log('current state is: ', store.getState());
@@ -1414,6 +1371,131 @@ function applyMiddleware() {
     };
   };
 }
+
+/***/ }),
+/* 24 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _redux = __webpack_require__(8);
+
+var _productsReducers = __webpack_require__(25);
+
+exports.default = (0, _redux.combineReducers)({
+    products: _productsReducers.productsReducers
+});
+
+/***/ }),
+/* 25 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+exports.productsReducers = productsReducers;
+
+function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
+
+// Products Reducers Must not Mutate the State - use PURE Funcitons
+function productsReducers() {
+    var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : { products: [] };
+    var action = arguments[1];
+
+    switch (action.type) {
+        case "POST_PRODUCT":
+            // let products = state.products.concat(action.payload);
+            //     return {products};
+            //The tow lines above can be changed by the spread operator below
+            return { products: [].concat(_toConsumableArray(state.products), _toConsumableArray(action.payload)) };
+            break;
+
+        case "DELETE_PRODUCT":
+            // Create temp copy of the array of products
+            var currentProductToDelete = [].concat(_toConsumableArray(state.products));
+            // Find the product by the index
+            var indexToDelete = currentProductToDelete.findIndex(function (product) {
+                return product.id === action.payload.id;
+            });
+            // Delete the product from the array
+            return {
+                products: [].concat(_toConsumableArray(currentProductToDelete.slice(0, indexToDelete)), _toConsumableArray(currentProductToDelete.slice(indexToDelete + 1)))
+            };
+            break;
+
+        case "UPDATE_PRODUCT":
+            // Create temp copy of the array of products
+            var currentProductToUpdate = [].concat(_toConsumableArray(state.products));
+            // Find the product by the index
+            var indexToUpdate = currentProductToUpdate.findIndex(function (product) {
+                return product.id === action.payload.id;
+            });
+            // Create a new product object
+            var newProductToUpdate = _extends({}, currentProductToUpdate[indexToUpdate], {
+                title: action.payload.title
+                //remove the product from the index and replace
+            });return {
+                products: [].concat(_toConsumableArray(currentProductToUpdate.slice(0, indexToUpdate)), [newProductToUpdate], _toConsumableArray(currentProductToUpdate.slice(indexToUpdate + 1)))
+            };
+            break;
+    }
+    return state;
+};
+// Reducers Must not Mutate the State - use PURE Funcitons
+var reducer = function reducer() {
+    var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : { products: [] };
+    var action = arguments[1];
+
+    switch (action.type) {
+        case "POST_PRODUCT":
+            // let products = state.products.concat(action.payload);
+            //     return {products};
+            //The tow lines above can be changed by the spread operator below
+            return { products: [].concat(_toConsumableArray(state.products), _toConsumableArray(action.payload)) };
+            break;
+
+        case "DELETE_PRODUCT":
+            // Create temp copy of the array of products
+            var currentProductToDelete = [].concat(_toConsumableArray(state.products));
+            // Find the product by the index
+            var indexToDelete = currentProductToDelete.findIndex(function (product) {
+                return product.id === action.payload.id;
+            });
+            // Delete the product from the array
+            return {
+                products: [].concat(_toConsumableArray(currentProductToDelete.slice(0, indexToDelete)), _toConsumableArray(currentProductToDelete.slice(indexToDelete + 1)))
+            };
+            break;
+
+        case "UPDATE_PRODUCT":
+            // Create temp copy of the array of products
+            var currentProductToUpdate = [].concat(_toConsumableArray(state.products));
+            // Find the product by the index
+            var indexToUpdate = currentProductToUpdate.findIndex(function (product) {
+                return product.id === action.payload.id;
+            });
+            // Create a new product object
+            var newProductToUpdate = _extends({}, currentProductToUpdate[indexToUpdate], {
+                title: action.payload.title
+                //remove the product from the index and replace
+            });return {
+                products: [].concat(_toConsumableArray(currentProductToUpdate.slice(0, indexToUpdate)), [newProductToUpdate], _toConsumableArray(currentProductToUpdate.slice(indexToUpdate + 1)))
+            };
+            break;
+    }
+    return state;
+};
 
 /***/ })
 /******/ ]);
