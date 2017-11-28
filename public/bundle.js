@@ -87,6 +87,7 @@ store.subscribe(function () {
 
 // Actions
 
+// --> Products Actions <--
 // Post - ADD
 store.dispatch({
     type: "POST_PRODUCT",
@@ -131,6 +132,14 @@ store.dispatch({
 store.dispatch({
     type: "DELETE_PRODUCT",
     payload: { id: 1 }
+});
+//
+
+// --> Cart Actions <--
+// ADD
+store.dispatch({
+    type: "ADD_CART",
+    payload: [{ id: 2 }]
 });
 
 /***/ }),
@@ -1387,9 +1396,12 @@ var _redux = __webpack_require__(8);
 
 var _productsReducers = __webpack_require__(25);
 
+var _cartReducers = __webpack_require__(26);
+
 exports.default = (0, _redux.combineReducers)({
-    products: _productsReducers.productsReducers
-});
+    products: _productsReducers.productsReducers,
+    cart: _cartReducers.cartReducers
+}); //This file import the REDUCERS and COMBINE
 
 /***/ }),
 /* 25 */
@@ -1496,6 +1508,32 @@ var reducer = function reducer() {
     }
     return state;
 };
+
+/***/ }),
+/* 26 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.cartReducers = cartReducers;
+
+function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
+
+function cartReducers() {
+    var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : { cart: [] };
+    var action = arguments[1];
+
+    switch (action.type) {
+        case "ADD_CART":
+            return { cart: [].concat(_toConsumableArray(state.cart), _toConsumableArray(action.payload)) };
+            break;
+    }
+    return state;
+}
 
 /***/ })
 /******/ ]);
