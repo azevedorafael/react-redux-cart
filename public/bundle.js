@@ -21871,6 +21871,10 @@ var _producstActions = __webpack_require__(29);
 
 var _reactBootstrap = __webpack_require__(193);
 
+var _ProductItem = __webpack_require__(334);
+
+var _ProductItem2 = _interopRequireDefault(_ProductItem);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -21899,28 +21903,18 @@ var ProductsList = function (_React$Component) {
         value: function render() {
             var productsList = this.props.products.map(function (arrayProducts) {
                 return _react2.default.createElement(
-                    'div',
-                    { key: arrayProducts.id },
-                    _react2.default.createElement(
-                        'h2',
-                        null,
-                        arrayProducts.title
-                    ),
-                    _react2.default.createElement(
-                        'h2',
-                        null,
-                        arrayProducts.description
-                    ),
-                    _react2.default.createElement(
-                        'h2',
-                        null,
-                        arrayProducts.price
-                    ),
-                    _react2.default.createElement(
-                        _reactBootstrap.Button,
-                        { bsStyle: 'primary' },
-                        'Add to cart'
-                    )
+                    _reactBootstrap.Col,
+                    { xs: 12, sm: 6, md: 4, key: arrayProducts.id },
+                    _react2.default.createElement(_ProductItem2.default, {
+                        id: arrayProducts.id,
+                        title: arrayProducts.title,
+                        description: arrayProducts.description,
+                        availableSizes: arrayProducts.availableSizes,
+                        style: arrayProducts.style,
+                        currencyFormat: arrayProducts.currencyFormat,
+                        price: arrayProducts.price,
+                        isFreeShipping: arrayProducts.isFreeShipping
+                    })
                 );
             });
             return _react2.default.createElement(
@@ -40879,6 +40873,90 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
 
+
+/***/ }),
+/* 333 */,
+/* 334 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(2);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactBootstrap = __webpack_require__(193);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var ProductItem = function (_React$Component) {
+    _inherits(ProductItem, _React$Component);
+
+    function ProductItem() {
+        _classCallCheck(this, ProductItem);
+
+        return _possibleConstructorReturn(this, (ProductItem.__proto__ || Object.getPrototypeOf(ProductItem)).apply(this, arguments));
+    }
+
+    _createClass(ProductItem, [{
+        key: 'render',
+        value: function render() {
+            return _react2.default.createElement(
+                _reactBootstrap.Well,
+                null,
+                _react2.default.createElement(
+                    _reactBootstrap.Row,
+                    null,
+                    _react2.default.createElement(
+                        _reactBootstrap.Col,
+                        { xs: 12 },
+                        _react2.default.createElement(
+                            'h4',
+                            null,
+                            this.props.title,
+                            ' - ',
+                            this.props.description
+                        ),
+                        _react2.default.createElement(
+                            'p',
+                            null,
+                            this.props.style
+                        ),
+                        _react2.default.createElement(
+                            'h5',
+                            null,
+                            this.props.currencyFormat,
+                            ' ',
+                            this.props.price
+                        ),
+                        _react2.default.createElement(
+                            _reactBootstrap.Button,
+                            { bsStyle: 'primary' },
+                            'Add to Cart'
+                        )
+                    )
+                )
+            );
+        }
+    }]);
+
+    return ProductItem;
+}(_react2.default.Component);
+
+exports.default = ProductItem;
 
 /***/ })
 /******/ ]);

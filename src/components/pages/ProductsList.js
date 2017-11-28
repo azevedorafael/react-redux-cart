@@ -4,6 +4,8 @@ import {bindActionCreators} from 'redux';
 import {getProducts} from '../../actions/producstActions';
 import {Grid ,Col, Row , Button} from  'react-bootstrap';
 
+import ProductItem from './ProductItem';
+
 class ProductsList extends React.Component{
     componentDidMount(){
         //The API data request goes here by calling Actions
@@ -13,12 +15,18 @@ class ProductsList extends React.Component{
     render(){
         const productsList = this.props.products.map(function(arrayProducts){
             return(
-                <div key={arrayProducts.id}>
-                    <h2>{arrayProducts.title}</h2>
-                    <h2>{arrayProducts.description}</h2>
-                    <h2>{arrayProducts.price}</h2>
-                    <Button bsStyle='primary'>Add to cart</Button>
-                </div>
+                <Col xs={12} sm={6} md={4} key={arrayProducts.id}>
+                    <ProductItem
+                        id= {arrayProducts.id}
+                        title= {arrayProducts.title}
+                        description={arrayProducts.description}
+                        availableSizes={arrayProducts.availableSizes}
+                        style = {arrayProducts.style}
+                        currencyFormat = {arrayProducts.currencyFormat}
+                        price = {arrayProducts.price}
+                        isFreeShipping = {arrayProducts.isFreeShipping}
+                    />
+                </Col>
             )
             });
         return(
