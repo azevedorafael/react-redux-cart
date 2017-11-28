@@ -76,6 +76,10 @@ var _index = __webpack_require__(24);
 
 var _index2 = _interopRequireDefault(_index);
 
+var _cartActions = __webpack_require__(27);
+
+var _producstActions = __webpack_require__(28);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 // Store
@@ -89,58 +93,31 @@ store.subscribe(function () {
 
 // --> Products Actions <--
 // Post - ADD
-store.dispatch({
-    type: "POST_PRODUCT",
-    payload: [{
-        id: 1,
-        title: 'Camiseta',
-        description: 'very fresh new one',
-        price: 33.33
-    }, {
-        id: 2,
-        title: 'Calça',
-        description: 'used',
-        price: 53.33
-    }]
-});
-
-store.dispatch({
-    type: "POST_PRODUCT",
-    payload: [{
-        id: 3,
-        title: 'Camisa',
-        description: 'very fresh new one',
-        price: 33.33
-    }, {
-        id: 4,
-        title: 'Boné',
-        description: 'used',
-        price: 53.33
-    }]
-});
+store.dispatch((0, _producstActions.postProducts)([{
+    id: 1,
+    title: 'Camisa',
+    description: 'very fresh new one',
+    price: 33.33
+}, {
+    id: 2,
+    title: 'Boné',
+    description: 'used',
+    price: 53.33
+}]));
 
 // Update
-store.dispatch({
-    type: "UPDATE_PRODUCT",
-    payload: {
-        id: 2,
-        title: 'New Title MTF'
-    }
-});
+store.dispatch((0, _producstActions.updateProducts)({
+    id: 2,
+    title: ' Relógio Nike'
+}));
 
 // Delete
-store.dispatch({
-    type: "DELETE_PRODUCT",
-    payload: { id: 1 }
-});
+store.dispatch((0, _producstActions.deleteProducts)({ id: 1 }));
 //
 
 // --> Cart Actions <--
 // ADD
-store.dispatch({
-    type: "ADD_CART",
-    payload: [{ id: 2 }]
-});
+store.dispatch((0, _cartActions.addCart)([{ id: 2 }]));
 
 /***/ }),
 /* 1 */
@@ -1533,6 +1510,58 @@ function cartReducers() {
             break;
     }
     return state;
+}
+
+/***/ }),
+/* 27 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.addCart = addCart;
+function addCart(product) {
+    return {
+        type: "ADD_CART",
+        payload: product
+    };
+}
+
+/***/ }),
+/* 28 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.postProducts = postProducts;
+exports.updateProducts = updateProducts;
+exports.deleteProducts = deleteProducts;
+function postProducts(product) {
+    return {
+        type: "POST_PRODUCT",
+        payload: product
+    };
+}
+
+function updateProducts(product) {
+    return {
+        type: "UPDATE_PRODUCT",
+        payload: product
+    };
+}
+
+function deleteProducts(id) {
+    return {
+        type: "DELETE_PRODUCT",
+        payload: id
+    };
 }
 
 /***/ })

@@ -2,6 +2,9 @@ import { createStore } from 'redux';
 
 import reducers from './reducers/index';
 
+import { addCart } from './actions/cartActions';
+import { postProducts, deleteProducts, updateProducts } from './actions/producstActions';
+
 // Store
 const store = createStore(reducers);
 
@@ -13,61 +16,37 @@ store.subscribe(function () {
 
 // --> Products Actions <--
 // Post - ADD
-store.dispatch({
-    type: "POST_PRODUCT",
-    payload: [{
+store.dispatch(postProducts(
+    [{
         id: 1,
-        title: 'Camiseta',
-        description: 'very fresh new one',
-        price: 33.33
-    },
-    {
-        id: 2,
-        title: 'Calça',
-        description: 'used',
-        price: 53.33
-    },
-    ]
-});
-
-
-store.dispatch({
-    type: "POST_PRODUCT",
-    payload: [{
-        id: 3,
         title: 'Camisa',
         description: 'very fresh new one',
         price: 33.33
     },
     {
-        id: 4,
+        id: 2,
         title: 'Boné',
         description: 'used',
         price: 53.33
-    },
-    ]
-});
+    }]
+));
+
 
 // Update
-store.dispatch({
-    type: "UPDATE_PRODUCT",
-    payload: {
+store.dispatch(updateProducts(
+    {
         id: 2,
-        title: 'New Title MTF'
-    },
-});
+        title: ' Relógio Nike'
+    }
+));
 
 // Delete
-store.dispatch({
-    type: "DELETE_PRODUCT",
-    payload: { id: 1 },
-});
+store.dispatch(deleteProducts(
+    { id: 1 }
+));
 //
 
 // --> Cart Actions <--
 // ADD
-store.dispatch({
-    type: "ADD_CART",
-    payload: [{ id: 2 }],
-});
+store.dispatch(addCart([{ id: 2 }]));
 
