@@ -1,3 +1,6 @@
+import React from 'react';
+import {render} from 'react-dom';
+
 import { applyMiddleware, createStore } from 'redux';
 import logger from 'redux-logger';
 
@@ -10,6 +13,9 @@ import { postProducts, deleteProducts, updateProducts } from './actions/producst
 const middleware = applyMiddleware(logger);
 const store = createStore(reducers, middleware);
 
+import ProductsList from './components/pages/ProductsList';
+
+render(<ProductsList/>, document.getElementById('app'));
 
 // store.subscribe(function () {
 //     console.log('current state is: ', store.getState());
