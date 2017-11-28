@@ -1,3 +1,9 @@
+export function getProducts(product) {
+    return {
+        type: "GET_PRODUCT",
+    }
+}
+
 export function postProducts(product) {
     return {
         type: "POST_PRODUCT",
