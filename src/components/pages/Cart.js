@@ -1,8 +1,26 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Panel, Col, Row, Well, Button, Label, ButtonGroup } from 'react-bootstrap';
+import { bindActionCreators } from 'redux';
+import { deleteCartItem } from '../../actions/cartActions';
 
 class Cart extends React.Component {
+
+    onDelete(_id) {
+
+        // Create temp copy of the array of products
+        const currentProductToDelete = this.props.cart;
+        // Find the product by the index
+        const indexToDelete = currentProductToDelete.findIndex(
+            function (cart) {
+                return cart._id === _id;
+            })
+        // Delete the product from the array
+        let cartAfterDelete = [...currentProductToDelete.slice(0, indexToDelete), ...currentProductToDelete.slice(indexToDelete + 1)]
+       
+        this.props.deleteCartItem(cartAfterDelete);
+    }
+
     render() {
         if (this.props.cart[0]) {
             return this.renderCart();
@@ -17,7 +35,7 @@ class Cart extends React.Component {
 
     renderCart() {
         const cartItemsList = this.props.cart.map(function (arrayCart) {
-            return(
+            return (
                 <Panel key={arrayCart._id}>
                     <Row>
                         <Col xs={12} sm={4}>
@@ -30,17 +48,17 @@ class Cart extends React.Component {
                             <h6>Quantity  <Label bsStyle="success"></Label></h6><span></span>
                         </Col>
                         <Col xs={6} sm={4}>
-                            <ButtonGroup style={{minWidth: '300px'}}>
+                            <ButtonGroup style={{ minWidth: '300px' }}>
                                 <Button bsStyle="default" bsSize="small">-</Button>
                                 <Button bsStyle="default" bsSize="small">+</Button>
                                 <span>     </span>
-                                <Button bsStyle="danger" bsSize="small">DELETE</Button>
+                                <Button onClick={this.onDelete.bind(this,arrayCart._id)} bsStyle="danger" bsSize="small">DELETE</Button>
                             </ButtonGroup>
                         </Col>
                     </Row>
                 </Panel>
             )
-        })
+        },this)
         return (
             <Panel header="Cart" bsStyle="primary">
                 {cartItemsList}
@@ -54,4 +72,10 @@ function mapStateToProps(state) {
     }
 }
 
-export default connect(mapStateToProps)(Cart);
+function mapDispatchToProps(dispatch) {
+    return bindActionCreators({
+        deleteCartItem: deleteCartItem
+    }, dispatch)
+}
+
+export default connect(mapStateToProps,mapDispatchToProps)(Cart);

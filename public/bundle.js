@@ -21824,6 +21824,10 @@ function cartReducers() {
         case "ADD_TO_CART":
             return { cart: [].concat(_toConsumableArray(state), _toConsumableArray(action.payload)) };
             break;
+
+        case "DELETE_CART_ITEM":
+            return { cart: [].concat(_toConsumableArray(state), _toConsumableArray(action.payload)) };
+            break;
     }
     return state;
 }
@@ -21839,10 +21843,18 @@ Object.defineProperty(exports, "__esModule", {
     value: true
 });
 exports.addToCart = addToCart;
+exports.deleteCartItem = deleteCartItem;
 function addToCart(product) {
     return {
         type: "ADD_TO_CART",
         payload: product
+    };
+}
+
+function deleteCartItem(cart) {
+    return {
+        type: "DELETE_CART_ITEM",
+        payload: cart
     };
 }
 
@@ -41029,7 +41041,13 @@ var _reactRedux = __webpack_require__(19);
 
 var _reactBootstrap = __webpack_require__(193);
 
+var _redux = __webpack_require__(7);
+
+var _cartActions = __webpack_require__(74);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -41047,6 +41065,21 @@ var Cart = function (_React$Component) {
     }
 
     _createClass(Cart, [{
+        key: 'onDelete',
+        value: function onDelete(_id) {
+
+            // Create temp copy of the array of products
+            var currentProductToDelete = this.props.cart;
+            // Find the product by the index
+            var indexToDelete = currentProductToDelete.findIndex(function (cart) {
+                return cart._id === _id;
+            });
+            // Delete the product from the array
+            var cartAfterDelete = [].concat(_toConsumableArray(currentProductToDelete.slice(0, indexToDelete)), _toConsumableArray(currentProductToDelete.slice(indexToDelete + 1)));
+
+            this.props.deleteCartItem(cartAfterDelete);
+        }
+    }, {
         key: 'render',
         value: function render() {
             if (this.props.cart[0]) {
@@ -41127,14 +41160,14 @@ var Cart = function (_React$Component) {
                                 ),
                                 _react2.default.createElement(
                                     _reactBootstrap.Button,
-                                    { bsStyle: 'danger', bsSize: 'small' },
+                                    { onClick: this.onDelete.bind(this, arrayCart._id), bsStyle: 'danger', bsSize: 'small' },
                                     'DELETE'
                                 )
                             )
                         )
                     )
                 );
-            });
+            }, this);
             return _react2.default.createElement(
                 _reactBootstrap.Panel,
                 { header: 'Cart', bsStyle: 'primary' },
@@ -41152,7 +41185,13 @@ function mapStateToProps(state) {
     };
 }
 
-exports.default = (0, _reactRedux.connect)(mapStateToProps)(Cart);
+function mapDispatchToProps(dispatch) {
+    return (0, _redux.bindActionCreators)({
+        deleteCartItem: _cartActions.deleteCartItem
+    }, dispatch);
+}
+
+exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(Cart);
 
 /***/ })
 /******/ ]);

@@ -4,3 +4,10 @@ export function addToCart(product){
         payload: product,
     }
 }
+
+export function deleteCartItem(cart){
+    return {
+        type: "DELETE_CART_ITEM",
+        payload: cart,
+    }
+}
