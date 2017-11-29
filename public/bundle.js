@@ -21812,6 +21812,9 @@ var reducer = function reducer() {
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
 exports.cartReducers = cartReducers;
 
 function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
@@ -21827,6 +21830,22 @@ function cartReducers() {
 
         case "DELETE_CART_ITEM":
             return { cart: [].concat(_toConsumableArray(state), _toConsumableArray(action.payload)) };
+            break;
+
+        case "UPDATE_CART":
+            // Create temp copy of the array of products
+            var currentProductToUpdate = [].concat(_toConsumableArray(state.cart));
+            // Find the product by the index
+            var indexToUpdate = currentProductToUpdate.findIndex(function (product) {
+                return product._id === action._id;
+            });
+            // Create a new product object
+            var newProductToUpdate = _extends({}, currentProductToUpdate[indexToUpdate], {
+                quantity: currentProductToUpdate[indexToUpdate].quantity + action.unit
+                //remove the product from the index and replace
+            });var cartUpdate = [].concat(_toConsumableArray(currentProductToUpdate.slice(0, indexToUpdate)), [newProductToUpdate], _toConsumableArray(currentProductToUpdate.slice(indexToUpdate + 1)));
+
+            return _extends({}, state, { cart: cartUpdate });
             break;
     }
     return state;
@@ -21844,6 +21863,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.addToCart = addToCart;
 exports.deleteCartItem = deleteCartItem;
+exports.updateCart = updateCart;
 function addToCart(product) {
     return {
         type: "ADD_TO_CART",
@@ -21855,6 +21875,14 @@ function deleteCartItem(cart) {
     return {
         type: "DELETE_CART_ITEM",
         payload: cart
+    };
+}
+
+function updateCart(_id, unit) {
+    return {
+        type: "UPDATE_CART",
+        _id: _id,
+        unit: unit
     };
 }
 
@@ -40951,9 +40979,25 @@ var ProductItem = function (_React$Component) {
                 style: this.props.style,
                 currencyFormat: this.props.currencyFormat,
                 price: this.props.price,
-                isFreeShipping: this.props.isFreeShipping
+                isFreeShipping: this.props.isFreeShipping,
+                quantity: 1
             }]);
-            this.props.addToCart(product);
+
+            if (this.props.cart.length > 0) {
+                var _id = this.props._id;
+
+                var cartIndex = this.props.cart.findIndex(function (cart) {
+                    return cart._id === _id;
+                });
+
+                if (cartIndex === -1) {
+                    this.props.addToCart(product);
+                } else {
+                    this.props.updateCart(_id, 1);
+                }
+            } else {
+                this.props.addToCart(product);
+            }
         }
     }, {
         key: 'render',
@@ -41013,7 +41057,8 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
     return (0, _redux.bindActionCreators)({
-        addToCart: _cartActions.addToCart
+        addToCart: _cartActions.addToCart,
+        updateCart: _cartActions.updateCart
     }, dispatch);
 }
 
@@ -41080,6 +41125,18 @@ var Cart = function (_React$Component) {
             this.props.deleteCartItem(cartAfterDelete);
         }
     }, {
+        key: 'onIncrement',
+        value: function onIncrement(_id) {
+            this.props.updateCart(_id, 1);
+        }
+    }, {
+        key: 'onDecrement',
+        value: function onDecrement(_id, quantity) {
+            if (quantity > 1) {
+                this.props.updateCart(_id, -1);
+            }
+        }
+    }, {
         key: 'render',
         value: function render() {
             if (this.props.cart[0]) {
@@ -41133,7 +41190,11 @@ var Cart = function (_React$Component) {
                                 'h6',
                                 null,
                                 'Quantity  ',
-                                _react2.default.createElement(_reactBootstrap.Label, { bsStyle: 'success' })
+                                _react2.default.createElement(
+                                    _reactBootstrap.Label,
+                                    { bsStyle: 'success' },
+                                    arrayCart.quantity
+                                )
                             ),
                             _react2.default.createElement('span', null)
                         ),
@@ -41145,12 +41206,12 @@ var Cart = function (_React$Component) {
                                 { style: { minWidth: '300px' } },
                                 _react2.default.createElement(
                                     _reactBootstrap.Button,
-                                    { bsStyle: 'default', bsSize: 'small' },
+                                    { onClick: this.onDecrement.bind(this, arrayCart._id, arrayCart.quantity), bsStyle: 'default', bsSize: 'small' },
                                     '-'
                                 ),
                                 _react2.default.createElement(
                                     _reactBootstrap.Button,
-                                    { bsStyle: 'default', bsSize: 'small' },
+                                    { onClick: this.onIncrement.bind(this, arrayCart._id), bsStyle: 'default', bsSize: 'small' },
                                     '+'
                                 ),
                                 _react2.default.createElement(
@@ -41187,7 +41248,8 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
     return (0, _redux.bindActionCreators)({
-        deleteCartItem: _cartActions.deleteCartItem
+        deleteCartItem: _cartActions.deleteCartItem,
+        updateCart: _cartActions.updateCart
     }, dispatch);
 }
 
