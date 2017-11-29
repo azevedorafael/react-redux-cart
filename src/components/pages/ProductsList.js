@@ -5,6 +5,7 @@ import {getProducts} from '../../actions/producstActions';
 import {Grid ,Col, Row , Button} from  'react-bootstrap';
 
 import ProductItem from './ProductItem';
+import Cart from './Cart';
 
 class ProductsList extends React.Component{
     componentDidMount(){
@@ -15,9 +16,9 @@ class ProductsList extends React.Component{
     render(){
         const productsList = this.props.products.map(function(arrayProducts){
             return(
-                <Col xs={12} sm={6} md={4} key={arrayProducts.id}>
+                <Col xs={12} sm={6} md={4} key={arrayProducts._id}>
                     <ProductItem
-                        id= {arrayProducts.id}
+                        _id= {arrayProducts._id}
                         title= {arrayProducts.title}
                         description={arrayProducts.description}
                         availableSizes={arrayProducts.availableSizes}
@@ -31,6 +32,9 @@ class ProductsList extends React.Component{
             });
         return(
             <Grid>
+                <Row>
+                    <Cart />
+                </Row>
                 <Row style={{marginTop: '15px'}}>
                     {productsList}
                 </Row>

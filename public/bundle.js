@@ -21507,7 +21507,7 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
 function productsReducers() {
     var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {
         products: [{
-            "id": 0,
+            "_id": 0,
             "sku": 8552515751438644,
             "title": "Camisa Nike Corinthians I",
             "description": "14/15 s/nº",
@@ -21519,7 +21519,7 @@ function productsReducers() {
             "currencyFormat": "R$",
             "isFreeShipping": true
         }, {
-            "id": 1,
+            "_id": 1,
             "sku": 18644119330491312,
             "title": "Camisa Nike Corinthians II",
             "description": "14/15 s/nº",
@@ -21531,7 +21531,7 @@ function productsReducers() {
             "currencyFormat": "R$",
             "isFreeShipping": true
         }, {
-            "id": 2,
+            "_id": 2,
             "sku": 11854078013954528,
             "title": "Camisa Feminina Nike Corinthians I",
             "description": "14/15 s/nº",
@@ -21543,7 +21543,7 @@ function productsReducers() {
             "currencyFormat": "R$",
             "isFreeShipping": true
         }, {
-            "id": 3,
+            "_id": 3,
             "sku": 876661122392077,
             "title": "Camisa Feminina Nike Corinthians II",
             "description": "2014 s/nº",
@@ -21555,7 +21555,7 @@ function productsReducers() {
             "currencyFormat": "R$",
             "isFreeShipping": true
         }, {
-            "id": 4,
+            "_id": 4,
             "sku": 9197907543445677,
             "title": "Camisa Nike Corinthians I",
             "description": "14/15 s/nº - Jogador",
@@ -21567,7 +21567,7 @@ function productsReducers() {
             "currencyFormat": "R$",
             "isFreeShipping": false
         }, {
-            "id": 5,
+            "_id": 5,
             "sku": 10547961582846888,
             "title": "Kit Corinthians - Camisa Nike II",
             "description": "14/15 + Camiseta 1º Mundial",
@@ -21579,7 +21579,7 @@ function productsReducers() {
             "currencyFormat": "R$",
             "isFreeShipping": false
         }, {
-            "id": 6,
+            "_id": 6,
             "sku": 6090484789343891,
             "title": "Calção Nike Corinthians",
             "description": "Goleiro 13/14",
@@ -21591,7 +21591,7 @@ function productsReducers() {
             "currencyFormat": "R$",
             "isFreeShipping": true
         }, {
-            "id": 7,
+            "_id": 7,
             "sku": 18532669286405342,
             "title": "Camisa Corinthians Réplica",
             "description": "1977 Infantil",
@@ -21603,7 +21603,7 @@ function productsReducers() {
             "currencyFormat": "R$",
             "isFreeShipping": true
         }, {
-            "id": 8,
+            "_id": 8,
             "sku": 5619496040738316,
             "title": "Calção Nike Strike Lgr Woven",
             "description": "",
@@ -21615,7 +21615,7 @@ function productsReducers() {
             "currencyFormat": "R$",
             "isFreeShipping": false
         }, {
-            "id": 9,
+            "_id": 9,
             "sku": 11600983276356165,
             "title": "Jaqueta Corinthians CP",
             "description": "",
@@ -21627,7 +21627,7 @@ function productsReducers() {
             "currencyFormat": "R$",
             "isFreeShipping": true
         }, {
-            "id": 10,
+            "_id": 10,
             "sku": 27250082398145995,
             "title": "Jaqueta Corinthians Urban c/ Capuz",
             "description": "",
@@ -21639,7 +21639,7 @@ function productsReducers() {
             "currencyFormat": "R$",
             "isFreeShipping": true
         }, {
-            "id": 11,
+            "_id": 11,
             "sku": 39876704341265606,
             "title": "Jaqueta Corinthians Elite",
             "description": "",
@@ -21651,7 +21651,7 @@ function productsReducers() {
             "currencyFormat": "R$",
             "isFreeShipping": true
         }, {
-            "id": 12,
+            "_id": 12,
             "sku": 12064273040195392,
             "title": "Tênis Nike Air Relentless",
             "description": "4 MSL",
@@ -21663,7 +21663,7 @@ function productsReducers() {
             "currencyFormat": "R$",
             "isFreeShipping": true
         }, {
-            "id": 13,
+            "_id": 13,
             "sku": 51498472915966366,
             "title": "Tênis Nike Biscuit Canvas",
             "description": "",
@@ -21675,7 +21675,7 @@ function productsReducers() {
             "currencyFormat": "R$",
             "isFreeShipping": true
         }, {
-            "id": 14,
+            "_id": 14,
             "sku": 10686354557628303,
             "title": "Camisa Nike Academy",
             "description": "GPX Poly 1",
@@ -21687,7 +21687,7 @@ function productsReducers() {
             "currencyFormat": "R$",
             "isFreeShipping": true
         }, {
-            "id": 15,
+            "_id": 15,
             "sku": 11033926921508487,
             "title": "Camisa Nike Corinthians",
             "description": "Treino 2014",
@@ -21699,7 +21699,7 @@ function productsReducers() {
             "currencyFormat": "R$",
             "isFreeShipping": true
         }, {
-            "id": 16,
+            "_id": 16,
             "sku": 10412368723880253,
             "title": "Camisa Polo Corinthians Ouro",
             "description": "",
@@ -21731,7 +21731,7 @@ function productsReducers() {
             var currentProductToDelete = [].concat(_toConsumableArray(state.products));
             // Find the product by the index
             var indexToDelete = currentProductToDelete.findIndex(function (product) {
-                return product.id === action.payload.id;
+                return product._id === action.payload._id;
             });
             // Delete the product from the array
             return {
@@ -21744,7 +21744,7 @@ function productsReducers() {
             var currentProductToUpdate = [].concat(_toConsumableArray(state.products));
             // Find the product by the index
             var indexToUpdate = currentProductToUpdate.findIndex(function (product) {
-                return product.id === action.payload.id;
+                return product._id === action.payload._id;
             });
             // Create a new product object
             var newProductToUpdate = _extends({}, currentProductToUpdate[indexToUpdate], {
@@ -21821,8 +21821,8 @@ function cartReducers() {
     var action = arguments[1];
 
     switch (action.type) {
-        case "ADD_CART":
-            return { cart: [].concat(_toConsumableArray(state.cart), _toConsumableArray(action.payload)) };
+        case "ADD_TO_CART":
+            return { cart: [].concat(_toConsumableArray(state), _toConsumableArray(action.payload)) };
             break;
     }
     return state;
@@ -21838,10 +21838,10 @@ function cartReducers() {
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
-exports.addCart = addCart;
-function addCart(product) {
+exports.addToCart = addToCart;
+function addToCart(product) {
     return {
-        type: "ADD_CART",
+        type: "ADD_TO_CART",
         payload: product
     };
 }
@@ -21875,6 +21875,10 @@ var _ProductItem = __webpack_require__(334);
 
 var _ProductItem2 = _interopRequireDefault(_ProductItem);
 
+var _Cart = __webpack_require__(336);
+
+var _Cart2 = _interopRequireDefault(_Cart);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -21904,9 +21908,9 @@ var ProductsList = function (_React$Component) {
             var productsList = this.props.products.map(function (arrayProducts) {
                 return _react2.default.createElement(
                     _reactBootstrap.Col,
-                    { xs: 12, sm: 6, md: 4, key: arrayProducts.id },
+                    { xs: 12, sm: 6, md: 4, key: arrayProducts._id },
                     _react2.default.createElement(_ProductItem2.default, {
-                        id: arrayProducts.id,
+                        _id: arrayProducts._id,
                         title: arrayProducts.title,
                         description: arrayProducts.description,
                         availableSizes: arrayProducts.availableSizes,
@@ -21920,6 +21924,11 @@ var ProductsList = function (_React$Component) {
             return _react2.default.createElement(
                 _reactBootstrap.Grid,
                 null,
+                _react2.default.createElement(
+                    _reactBootstrap.Row,
+                    null,
+                    _react2.default.createElement(_Cart2.default, null)
+                ),
                 _react2.default.createElement(
                     _reactBootstrap.Row,
                     { style: { marginTop: '15px' } },
@@ -40894,7 +40903,15 @@ var _react2 = _interopRequireDefault(_react);
 
 var _reactBootstrap = __webpack_require__(193);
 
+var _reactRedux = __webpack_require__(19);
+
+var _redux = __webpack_require__(7);
+
+var _cartActions = __webpack_require__(74);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -40912,6 +40929,21 @@ var ProductItem = function (_React$Component) {
     }
 
     _createClass(ProductItem, [{
+        key: 'handleCart',
+        value: function handleCart() {
+            var product = [].concat(_toConsumableArray(this.props.cart), [{
+                _id: this.props._id,
+                title: this.props.title,
+                description: this.props.description,
+                availableSizes: this.props.availableSizes,
+                style: this.props.style,
+                currencyFormat: this.props.currencyFormat,
+                price: this.props.price,
+                isFreeShipping: this.props.isFreeShipping
+            }]);
+            this.props.addToCart(product);
+        }
+    }, {
         key: 'render',
         value: function render() {
             return _react2.default.createElement(
@@ -40936,6 +40968,11 @@ var ProductItem = function (_React$Component) {
                             this.props.style
                         ),
                         _react2.default.createElement(
+                            'p',
+                            null,
+                            this.props.availableSizes
+                        ),
+                        _react2.default.createElement(
                             'h5',
                             null,
                             this.props.currencyFormat,
@@ -40944,7 +40981,7 @@ var ProductItem = function (_React$Component) {
                         ),
                         _react2.default.createElement(
                             _reactBootstrap.Button,
-                            { bsStyle: 'primary' },
+                            { onClick: this.handleCart.bind(this), bsStyle: 'primary' },
                             'Add to Cart'
                         )
                     )
@@ -40956,7 +40993,166 @@ var ProductItem = function (_React$Component) {
     return ProductItem;
 }(_react2.default.Component);
 
-exports.default = ProductItem;
+function mapStateToProps(state) {
+    return {
+        cart: state.cart.cart
+    };
+}
+
+function mapDispatchToProps(dispatch) {
+    return (0, _redux.bindActionCreators)({
+        addToCart: _cartActions.addToCart
+    }, dispatch);
+}
+
+exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(ProductItem);
+
+/***/ }),
+/* 335 */,
+/* 336 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(2);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactRedux = __webpack_require__(19);
+
+var _reactBootstrap = __webpack_require__(193);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var Cart = function (_React$Component) {
+    _inherits(Cart, _React$Component);
+
+    function Cart() {
+        _classCallCheck(this, Cart);
+
+        return _possibleConstructorReturn(this, (Cart.__proto__ || Object.getPrototypeOf(Cart)).apply(this, arguments));
+    }
+
+    _createClass(Cart, [{
+        key: 'render',
+        value: function render() {
+            if (this.props.cart[0]) {
+                return this.renderCart();
+            } else {
+                return this.renderEmpty();
+            }
+        }
+    }, {
+        key: 'renderEmpty',
+        value: function renderEmpty() {
+            return _react2.default.createElement('div', null);
+        }
+    }, {
+        key: 'renderCart',
+        value: function renderCart() {
+            var cartItemsList = this.props.cart.map(function (arrayCart) {
+                return _react2.default.createElement(
+                    _reactBootstrap.Panel,
+                    { key: arrayCart._id },
+                    _react2.default.createElement(
+                        _reactBootstrap.Row,
+                        null,
+                        _react2.default.createElement(
+                            _reactBootstrap.Col,
+                            { xs: 12, sm: 4 },
+                            _react2.default.createElement(
+                                'h6',
+                                null,
+                                arrayCart.title,
+                                arrayCart.description
+                            ),
+                            _react2.default.createElement('span', null)
+                        ),
+                        _react2.default.createElement(
+                            _reactBootstrap.Col,
+                            { xs: 12, sm: 2 },
+                            _react2.default.createElement(
+                                'h6',
+                                null,
+                                arrayCart.currencyFormat,
+                                ' ',
+                                arrayCart.price
+                            ),
+                            _react2.default.createElement('span', null)
+                        ),
+                        _react2.default.createElement(
+                            _reactBootstrap.Col,
+                            { xs: 12, sm: 2 },
+                            _react2.default.createElement(
+                                'h6',
+                                null,
+                                'Quantity  ',
+                                _react2.default.createElement(_reactBootstrap.Label, { bsStyle: 'success' })
+                            ),
+                            _react2.default.createElement('span', null)
+                        ),
+                        _react2.default.createElement(
+                            _reactBootstrap.Col,
+                            { xs: 6, sm: 4 },
+                            _react2.default.createElement(
+                                _reactBootstrap.ButtonGroup,
+                                { style: { minWidth: '300px' } },
+                                _react2.default.createElement(
+                                    _reactBootstrap.Button,
+                                    { bsStyle: 'default', bsSize: 'small' },
+                                    '-'
+                                ),
+                                _react2.default.createElement(
+                                    _reactBootstrap.Button,
+                                    { bsStyle: 'default', bsSize: 'small' },
+                                    '+'
+                                ),
+                                _react2.default.createElement(
+                                    'span',
+                                    null,
+                                    '     '
+                                ),
+                                _react2.default.createElement(
+                                    _reactBootstrap.Button,
+                                    { bsStyle: 'danger', bsSize: 'small' },
+                                    'DELETE'
+                                )
+                            )
+                        )
+                    )
+                );
+            });
+            return _react2.default.createElement(
+                _reactBootstrap.Panel,
+                { header: 'Cart', bsStyle: 'primary' },
+                cartItemsList
+            );
+        }
+    }]);
+
+    return Cart;
+}(_react2.default.Component);
+
+function mapStateToProps(state) {
+    return {
+        cart: state.cart.cart
+    };
+}
+
+exports.default = (0, _reactRedux.connect)(mapStateToProps)(Cart);
 
 /***/ })
 /******/ ]);

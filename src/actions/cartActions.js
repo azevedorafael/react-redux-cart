@@ -1,6 +1,6 @@
-export function addCart(product){
+export function addToCart(product){
     return {
-        type: "ADD_CART",
+        type: "ADD_TO_CART",
         payload: product,
     }
 }
