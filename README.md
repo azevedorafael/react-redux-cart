@@ -1,6 +1,7 @@
 # Shopping Cart  🛒
 
-Shopping Cart project shows a list of products on load and allow to add to the cart
+Shopping Cart project shows a list of products on load and allow to add to the cart.
+
 The application uses React and Redux.
 
 ## Features 🛍️
