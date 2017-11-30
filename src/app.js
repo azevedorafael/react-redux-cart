@@ -15,11 +15,16 @@ const middleware = applyMiddleware(logger);
 const store = createStore(reducers, middleware);
 
 import ProductsList from './components/pages/ProductsList';
+import Menu from './components/menu';
+import Footer from './components/footer';
 
 render(
     <Provider store={store}>
-
-        <ProductsList />
+        <div>
+            <Menu />
+            <ProductsList />
+            <Footer/>
+        </div>
 
     </Provider>, document.getElementById('app'));
 

@@ -43,7 +43,7 @@ class ProductItem extends React.Component{
             <Well>
                 <Row>
                     <Col xs={12}>
-                        <h4>{this.props.title} - {this.props.description}</h4>
+                        <h4>{this.props.title}</h4>
                         <p>{this.props.style}</p>
                         <p>{this.props.availableSizes}</p>
                         <h5>{this.props.currencyFormat} {this.props.price}</h5>
