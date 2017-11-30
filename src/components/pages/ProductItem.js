@@ -45,7 +45,9 @@ class ProductItem extends React.Component{
                     <Col xs={12}>
                         <h4>{this.props.title}</h4>
                         <p>{this.props.style}</p>
-                        <p>{this.props.availableSizes}</p>
+                        <p>{this.props.availableSizes.map(sizes =>
+                                sizes + " / "
+                            )}</p>
                         <h5>{this.props.currencyFormat} {this.props.price}</h5>
                         <Button onClick={this.handleCart.bind(this)} bsStyle='primary'>Add to Cart</Button>
                     </Col>

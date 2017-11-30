@@ -46920,7 +46920,9 @@ var ProductItem = function (_React$Component) {
                         _react2.default.createElement(
                             'p',
                             null,
-                            this.props.availableSizes
+                            this.props.availableSizes.map(function (sizes) {
+                                return sizes + " / ";
+                            })
                         ),
                         _react2.default.createElement(
                             'h5',
