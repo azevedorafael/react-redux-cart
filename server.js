@@ -5,7 +5,7 @@ var path = require('path');
 // MIDDLEWARE TO DEFINE FOLDER FOR STATIC FILES
 app.use(express.static('public'))
 
-app.get('/',function(){
+app.get('*',function(){
     res.sendFile(path.resolve(_dirname, 'public' , 'index.html'))
 })
 

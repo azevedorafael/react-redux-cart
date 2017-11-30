@@ -1,6 +1,7 @@
 import React from 'react';
 import { render } from 'react-dom';
 import { Provider } from 'react-redux';
+import {Router, Route, IndexRoute, browserHistory } from 'react-router';
 
 import { applyMiddleware, createStore } from 'redux';
 import logger from 'redux-logger';
@@ -15,18 +16,25 @@ const middleware = applyMiddleware(logger);
 const store = createStore(reducers, middleware);
 
 import ProductsList from './components/pages/ProductsList';
-import Menu from './components/menu';
-import Footer from './components/footer';
+import Cart from './components/pages/Cart';
+import Main from './main';
+// import Menu from './components/menu';
+// import Footer from './components/footer';
+
+const Routes = (
+    <Provider store={store}>
+        <Router history={browserHistory}>
+            <Route path="/" component={Main}>
+                <IndexRoute component={ProductsList} />
+                <Route path="/cart" component={Cart} />
+            </Route>
+        </Router>
+    </Provider>
+)
 
 render(
-    <Provider store={store}>
-        <div>
-            <Menu />
-            <ProductsList />
-            <Footer/>
-        </div>
-
-    </Provider>, document.getElementById('app'));
+    Routes, document.getElementById('app')
+);
 
 // store.subscribe(function () {
 //     console.log('current state is: ', store.getState());
